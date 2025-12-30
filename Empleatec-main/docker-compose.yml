@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Servicio de Base de Datos
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_DATABASE: bolsa_empleo
+      MYSQL_ROOT_PASSWORD: admin123
+    ports:
+      - "3306:3306"
+
+  # Servicio de tu aplicación PHP
+  app:
+    build: .
+    container_name: php_app
+    ports:
+      - "80:80"
+    depends_on:
+      - db
